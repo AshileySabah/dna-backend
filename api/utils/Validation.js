@@ -54,15 +54,15 @@ class Validation {
     const checkDimension = this?.validateMatrixDimension(checkArray?.array);
 
     if (!checkArray?.isArray) {
-      throw { message: errorMessages?.array, status: 404 };
+      throw { message: errorMessages?.array, status: 400 };
     }
 
     if (!checkMultidimentional) {
-      throw { message: errorMessages?.multidimensional, status: 404 };
+      throw { message: errorMessages?.multidimensional, status: 400 };
     }
 
     if (!checkDimension) {
-      throw { message: errorMessages?.dimension, status: 404 };
+      throw { message: errorMessages?.dimension, status: 400 };
     }
 
     return checkArray?.array;
