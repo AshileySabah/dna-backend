@@ -7,15 +7,16 @@ class ExamController {
     try {
       const matrix = Validation?.treatMatrixParameter(req?.body?.matrix);
 
-      const checkAnomalies = Helper?.checkAnomalies(matrix);
-      if (checkAnomalies?.allOccurrences > 0) {
+      const count_anomalies = Helper?.checkAnomalies(matrix)?.allOccurrences;
+      if (count_anomalies > 0) {
+        await database?.Exams?.create({ count_anomalies });
         return res?.status(200)?.send({ message: "Anomalies were found." });
       } else {
         return res?.status(403)?.send({ message: "No anomalies were found." });
       }
     } catch (error) {
       const { message, status } = error;
-      return res?.status(status)?.send({ message });
+      return res?.status(status ?? 500)?.send({ message });
     }
   }
 }
