@@ -19,6 +19,24 @@ class ExamController {
       return res?.status(status ?? 500)?.send({ message });
     }
   }
+
+  static async getStatistcs(req, res) {
+    try {
+      const count_anomalies = await database?.Exams?.sum("count_anomalies");
+      const count_no_anomalies = await database?.Exams?.count({
+        where: { count_anomalies: 0 },
+      });
+      const ratio =
+        Number(count_anomalies) /
+        (Number(count_anomalies) + Number(count_no_anomalies));
+      return res
+        ?.status(200)
+        ?.send({ count_anomalies, count_no_anomalies, ratio });
+    } catch (error) {
+      const { message } = error;
+      return res?.status(500)?.send({ message });
+    }
+  }
 }
 
 module.exports = ExamController;
