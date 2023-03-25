@@ -73,40 +73,44 @@ class Helper {
     const diagonalArray = this?.getDiagonal(matrix);
     const verticalArray = this?.getVertical(matrix);
 
-    const diagonalOccurrences = [];
+    let diagonalOccurrences = 0;
     for (let i = 0; i < diagonalArray?.length; i++) {
       const checkAnomaliesDiagonal = this?.checkEqualAndConsecutiveItems(
         diagonalArray[i],
       );
       if (checkAnomaliesDiagonal) {
-        diagonalOccurrences?.push(1);
+        diagonalOccurrences += 1;
       }
     }
 
-    const verticalOccurrences = [];
+    let verticalOccurrences = 0;
     for (let i = 0; i < verticalArray?.length; i++) {
       const checkAnomaliesVertical = this?.checkEqualAndConsecutiveItems(
         verticalArray[i],
       );
       if (checkAnomaliesVertical) {
-        verticalOccurrences?.push(1);
+        verticalOccurrences += 1;
       }
     }
 
-    const horizontalOccurrences = [];
+    let horizontalOccurrences = 0;
     for (let i = 0; i < matrix?.length; i++) {
       const checkAnomaliesHorizontal = this?.checkEqualAndConsecutiveItems(
         matrix[i],
       );
       if (checkAnomaliesHorizontal) {
-        horizontalOccurrences?.push(1);
+        horizontalOccurrences += 1;
       }
     }
 
+    const allOccurrences =
+      diagonalOccurrences + verticalOccurrences + horizontalOccurrences;
+
     return {
-      diagonalOccurrences: diagonalOccurrences?.length,
-      verticalOccurrences: verticalOccurrences?.length,
-      horizontalOccurrences: horizontalOccurrences?.length,
+      diagonalOccurrences,
+      verticalOccurrences,
+      horizontalOccurrences,
+      allOccurrences,
     };
   }
 }
