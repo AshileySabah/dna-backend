@@ -5,9 +5,9 @@ const Helper = require("../utils/Helper");
 class ExamController {
   static async validateAnomaly(req, res) {
     try {
-      const matrix = Validation?.treatMatrixParameter(req?.matrix);
+      const matrix = Validation?.treatMatrixParameter(req?.body?.matrix);
 
-      const checkAnomalies = Helper?.checkAnomalies();
+      const checkAnomalies = Helper?.checkAnomalies(matrix);
       if (
         checkAnomalies?.diagonalOccurrences > 0 ||
         checkAnomalies?.verticalOccurrences > 0 ||

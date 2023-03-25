@@ -22,7 +22,7 @@ class Validation {
     const flattened = [];
     for (let i = 0; i < matrix?.length; i++) {
       if (Array.isArray(matrix[i])) {
-        flattened.push(...destructureMultidimentionalArray(matrix[i]));
+        flattened.push(...this?.destructureMultidimentionalArray(matrix[i]));
       } else {
         flattened.push(matrix[i]);
       }
@@ -31,7 +31,7 @@ class Validation {
   }
 
   static validateMatrixDimension(matrix) {
-    const matrixLength = destructureMultidimentionalArray(matrix)?.length;
+    const matrixLength = this?.destructureMultidimentionalArray(matrix)?.length;
     const dimension = Math.sqrt(matrixLength);
     if (Number?.isInteger(dimension) && dimension >= 3 && dimension <= 2000) {
       return true;
@@ -43,26 +43,26 @@ class Validation {
     const errorMessages = {
       array: "The informed value is not a array.",
       multidimensional: "This array is not a multidimentional array.",
-      dimension: "This multidimentional array does not have the dimension between 3 and 2000.",
+      dimension:
+        "This multidimentional array does not have the dimension between 3 and 2000.",
     };
 
-    const checkArray = validateIsArrayAsString(matrix);
-    const checkMultidimentional = validateIsMultidimentionalArray(checkArray?.array);
-    const checkDimension = validateMatrixDimension(checkArray?.array);
+    const checkArray = this?.validateIsArrayAsString(matrix);
+    const checkMultidimentional = this?.validateIsMultidimentionalArray(
+      checkArray?.array,
+    );
+    const checkDimension = this?.validateMatrixDimension(checkArray?.array);
 
     if (!checkArray?.isArray) {
-      throw new Error({ message: errorMessages?.array, status: 404 });
+      throw { message: errorMessages?.array, status: 404 };
     }
 
     if (!checkMultidimentional) {
-      throw new Error({
-        message: errorMessages?.multidimensional,
-        status: 404,
-      });
+      throw { message: errorMessages?.multidimensional, status: 404 };
     }
 
     if (!checkDimension) {
-      throw new Error({ message: errorMessages?.dimension, status: 404 });
+      throw { message: errorMessages?.dimension, status: 404 };
     }
 
     return checkArray?.array;

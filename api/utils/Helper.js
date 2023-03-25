@@ -53,9 +53,9 @@ class Helper {
   }
 
   static getDiagonal(matrix) {
-    const rightBottomToLeftTop = getOneSideDiagonal(matrix);
-    const leftBottomToRighttop = getOneSideDiagonal(
-      reverseMultidimentionalArray(matrix),
+    const rightBottomToLeftTop = this?.getOneSideDiagonal(matrix);
+    const leftBottomToRighttop = this?.getOneSideDiagonal(
+      this?.reverseMultidimentionalArray(matrix),
     );
     return [...rightBottomToLeftTop, ...leftBottomToRighttop];
   }
@@ -70,12 +70,12 @@ class Helper {
   }
 
   static checkAnomalies(matrix) {
-    const diagonalArray = getDiagonal(matrix);
-    const verticalArray = getVertical(matrix);
+    const diagonalArray = this?.getDiagonal(matrix);
+    const verticalArray = this?.getVertical(matrix);
 
     const diagonalOccurrences = [];
     for (let i = 0; i < diagonalArray?.length; i++) {
-      const checkAnomaliesDiagonal = checkEqualAndConsecutiveItems(
+      const checkAnomaliesDiagonal = this?.checkEqualAndConsecutiveItems(
         diagonalArray[i],
       );
       if (checkAnomaliesDiagonal) {
@@ -85,7 +85,7 @@ class Helper {
 
     const verticalOccurrences = [];
     for (let i = 0; i < verticalArray?.length; i++) {
-      const checkAnomaliesVertical = checkEqualAndConsecutiveItems(
+      const checkAnomaliesVertical = this?.checkEqualAndConsecutiveItems(
         verticalArray[i],
       );
       if (checkAnomaliesVertical) {
@@ -95,7 +95,9 @@ class Helper {
 
     const horizontalOccurrences = [];
     for (let i = 0; i < matrix?.length; i++) {
-      const checkAnomaliesHorizontal = checkEqualAndConsecutiveItems(matrix[i]);
+      const checkAnomaliesHorizontal = this?.checkEqualAndConsecutiveItems(
+        matrix[i],
+      );
       if (checkAnomaliesHorizontal) {
         horizontalOccurrences?.push(1);
       }
