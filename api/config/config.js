@@ -1,10 +1,10 @@
 require("dotenv/config");
 
-const config = {
+module.exports = {
   development: {
-    username: process.env.DATABASE_USERNAME,
-    password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE_NAME,
+    username: "root",
+    password: "root@123",
+    database: "dna",
     host: "127.0.0.1",
     dialect: "mysql",
   },
@@ -23,5 +23,3 @@ const config = {
     dialect: "mysql",
   },
 };
-
-return config;
